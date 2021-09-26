@@ -12,152 +12,34 @@
       crossorigin="anonymous"
     />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <style>
-      .container {
-        text-align: center;
-        border: 5px solid white;
-        border-radius: 30px;
-        padding: 30 30px;
-        margin: 30px;
-
-        color: white;
-
-        background: #fff
-          url("http://getwallpapers.com/wallpaper/full/2/9/4/793857-free-download-ocean-desktop-backgrounds-3840x2160.jpg");
-
-        box-shadow: 2px 2px 20px lightseagreen;
-        opacity: 70%;
-
-        position: absolute;
-        visibility: visible;
-        left: 210px;
-        top: 40px;
-        height: 440px;
-        width: 800px;
-        z-index: 200;
-      }
-      .github {
-        font-style: bold;
-        position: absolute;
-        visibility: visible;
-        left: 260px;
-        top: 520px;
-        height: 0px;
-        width: 130px;
-        z-index: 200;
-
-        color: seagreen;
-        font-size: 13px;
-        margin: 10;
-        text-align: center;
-      }
-      h1 {
-        font-style: bold;
-        position: absolute;
-        visibility: visible;
-        left: 200px;
-        top: 220px;
-        height: 100px;
-        width: 150px;
-        z-index: 200;
-        font-size: 25px;
-        color: white;
-        font-style: italic;
-        margin: 10;
-        text-align: center;
-      }
-      h2 {
-        position: absolute;
-        visibility: visible;
-        left: 200px;
-        top: 220px;
-        height: 100px;
-        width: 150px;
-        z-index: 200;
-        font-size: 25px;
-        color: white;
-        font-style: italic;
-        margin: 10;
-        text-align: center;
-      }
-
-      .search {
-        font-size: 23px;
-        border-radius: 10px;
-        background-color: lightseagreen;
-        border-color: white;
-        margin: 20px;
-        color: white;
-        opacity: 80%;
-      }
-      .search:hover {
-        color: lightseagreen;
-        background-color: white;
-        border-color: white;
-
-        transition: all 200ms ease-in-out;
-        box-shadow: 2px 2px 20px lightseagreen;
-      }
-
-      input {
-        text-align: center;
-        border-radius: 10px;
-        padding: 10px 20px;
-        border-color: white;
-        color: lightseagreen;
-      }
-
-      #temp {
-        position: absolute;
-        visibility: visible;
-        left: 80px;
-        top: 260px;
-        height: 100px;
-        width: 150px;
-        z-index: 200;
-        font-size: 35px;
-        font-style: italic;
-      }
-
-      #temperature-description {
-        color: white;
-        text-align: center;
-        position: absolute;
-        visibility: visible;
-        left: 320px;
-        top: 280px;
-        height: 100px;
-        width: 150px;
-        z-index: 200;
-        font-size: 20px;
-        font-style: italic;
-        font-size: 20px;
-      }
-    </style>
+    
+      
   </head>
   <body>
-    <div class="container">
-      <form id="form">
-        <div class="mb-3">
-          <input type="text" id="form-city" placeholder="Enter a Destination" />
-          <button type="search" class="btn btn-primary search">Search</button>
-          <h1 id="city">Makaha, O'ahu</h1>
-          <h2 id="date">Tuesday 3:00pm</h2>
-
-          <div id="temp">☀85°</div>
-          <div id="temperature-description">Clear</div>
-        </div>
-      </form>
+  <div class="container">
+    <div class="weatherApp">
+      <h1>Makaha, Oahu</h1>
+      <ul>
+        <li>Friday 05:00</li>
+        <li>Clear</li>
+      </ul>
+      <div class="row">
+        <div class="col-6">12°C |°F</div>
+        <div class="col-6">
+        <ul>
+          <li>Precipitation: 0%</li>
+          <li>Humidity: 0%</li>
+          <li>Wind: 2 km/h</li>
+        </ul>
+      </div>
     </div>
-    <small class="github">
-      <a
-        href="https://github.com/ShaunaFeatherston/WeatherApp"
-        target="_blank"
-        ;
-        >Open source code</a
-      >
-      by Shauna Featherston
+  </div>
+    
+    <small>
+      <a href="https://github.com/ShaunaFeatherston/WeatherApp"
+      target="_blank">Open source code</a> by Shauna Featherston
     </small>
+
     <script>
       let now = new Date();
       let day = [
