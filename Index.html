@@ -46,6 +46,9 @@
         line-height: 19px;
         text-transform: capitalize;
       }
+      #temperature {
+        font-size: 50px;
+      }
     </style>
   </head>
   <body>
@@ -60,23 +63,21 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <div class="clearfix"></div>
             <img
               src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
               alt="Clear"
               class="float-left"
             />
-            <div class="float-left">
-              <strong id="temperature">12</strong>
-              <span class="units"> °C |<a href="#">°F</a></span>
-            </div>
+            <strong id="temperature">12</strong>
+            <span class="units"> °C |<a href="#">°F</a></span>
           </div>
-        </div>
-        <div class="col-sm">
-          <ul class="extra">
-            <li>Humidity: <span id="humidity"></span>%</li>
-            <li>Wind: <span id="wind"></span> Km/H</li>
-          </ul>
+
+          <div class="col-6">
+            <ul class="extra">
+              <li>Humidity: <span id="humidity"></span>%</li>
+              <li>Wind: <span id="wind"></span> Km/H</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
