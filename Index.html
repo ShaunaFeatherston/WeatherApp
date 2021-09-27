@@ -11,69 +11,126 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<style>
-  .weatherApp {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 30px;
-}
-h1 {
-  font-size: 24px;
-  font-weight: 100;
-  line-height: 28px;
-  margin-bottom:0;
-}
-ul{
-  margin:0;
-  padding:0;
-}
-li {
-  list-style: none;
-  margin: 0;
-  padding:0;
-  font-size: 16px;
-  font-weight: 100;
-  line-height: 19px;
-
-}
-.github{
-  position: absolute; 
-  visibility: visible; 
-  left: 20px; 
-  top: 300px; 
-  height: 100px; 
-  width: 150px; 
-  z-index: 200; }
-
-
-</style>
+    <style>
+      .weatherApp {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: 30px;
+        text-align: center;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 100;
+        line-height: 28px;
+        margin-bottom: 0;
+      }
+      .extra {
+        margin: 0 auto;
+        padding: 20px;
+        text-align: left;
+      }
+      .date {
+        margin: 0 auto;
+        padding: 20px;
+      }
+      li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        font-weight: 100;
+        line-height: 19px;
+        text-transform: capitalize;
+      }
+    </style>
   </head>
   <body>
-  <div class="container">
-    <div class="weatherApp">
-      <h1>Makaha, Oahu</h1>
-      <ul>
-        <li>Friday 05:00</li>
-        <li>Clear</li>
-      </ul>
-      <div class="row">
-        <div class="col-6">12°C |°F</div>
-        <div class="col-6">
-        <ul>
-          <li>Precipitation: 0%</li>
-          <li>Humidity: 0%</li>
-          <li>Wind: 2 km/h</li>
-        </ul>
+    <div class="container">
+      <div class="weatherApp">
+        <div class="overview">
+          <h1 id="city"></h1>
+          <ul>
+            <li id="date"></li>
+            <li id="description"></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="clearfix"></div>
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+              alt="Clear"
+              class="float-left"
+            />
+            <div class="float-left">
+              <strong id="temperature">12</strong>
+              <span class="units"> °C |<a href="#">°F</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <ul class="extra">
+            <li>Humidity: <span id="humidity"></span>%</li>
+            <li>Wind: <span id="wind"></span> Km/H</li>
+          </ul>
+        </div>
       </div>
     </div>
+
     <small class="github">
-      <a href="https://github.com/ShaunaFeatherston/WeatherApp"
-      target="_blank">Open source code</a> by Shauna Featherston
+      <a href="https://github.com/ShaunaFeatherston/WeatherApp" target="_blank"
+        >Open source code</a
+      >
+      by Shauna Featherston
     </small>
-  </div>
+    <script>
+      function formatDate(timestamp) {
+        let date = new Date(timestamp);
+        let hours = date.getHours();
+        if (hours < 10) {
+          hours = `0${hours}`;
+        }
+        let minutes = date.getMinutes();
+        if (minutes < 10) {
+          minutes = `0${minutes}`;
+        }
+        let days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        let day = days[date.getDay()];
+        return `${day} ${hours}:${minutes}`;
+      }
+      function displayTemperature(response) {
+        console.log(response.data);
+        let temperatureElement = document.querySelector("#temperature");
+        let cityElement = document.querySelector("#city");
+        let descriptionElement = document.querySelector("#description");
+        let humidityElement = document.querySelector("#humidity");
+        let windElement = document.querySelector("#wind");
+        let dateElement = document.querySelector("#date");
+
+        temperatureElement.innerHTML = Math.round(response.data.main.temp);
+        cityElement.innerHTML = response.data.name;
+        descriptionElement.innerHTML = response.data.weather[0].description;
+        humidityElement.innerHTML = response.data.main.humidity;
+        windElement.innerHTML = Math.round(response.data.wind.speed);
+        dateElement.innerHTMl = formatDate(response.data.dt * 1000);
+      }
+      let apiKey = "2f31d99583cac678f183e0eca629c6e7";
+      let city = "Makaha";
+      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+
+      axios.get(apiUrl).then(displayTemperature);
+    </script>
   </body>
 </html>
