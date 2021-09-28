@@ -56,6 +56,17 @@
         padding: 10px 0px;
         margin: 0 auto;
       }
+      .weather-temperature .units {
+        text-decoration: none;
+      }
+
+      .weather-temperature .active {
+        color: black;
+        cursor: default;
+      }
+      .weather-temperature .active:hover {
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
@@ -90,14 +101,22 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-              alt="Clear"
-              id="icon"
-              class="float-left"
-            />
-            <strong id="temperature">12</strong>
-            <span class="units"> °C |<a href="#">°F</a></span>
+            <div class="clearfix weather-temperature">
+              <img
+                src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                alt="Clear"
+                id="icon"
+                class="float-left"
+              />
+              <strong id="temperature">12</strong>
+              <span class="units">
+                <a href="#" id="celcius-link" class="active"> °C </a> |<a
+                  href="#"
+                  id="fahrenheit-link"
+                  >°F</a
+                ></span
+              >
+            </div>
           </div>
 
           <div class="col-6">
@@ -151,6 +170,8 @@
         let dateElement = document.querySelector("#date");
         let iconElement = document.querySelector("#icon");
 
+        celciusTemperature = response.data.main.temp;
+
         temperatureElement.innerHTML = Math.round(response.data.main.temp);
         cityElement.innerHTML = response.data.name;
         descriptionElement.innerHTML = response.data.weather[0].description;
@@ -166,7 +187,7 @@
       }
       function search(city) {
         let apiKey = "2f31d99583cac678f183e0eca629c6e7";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
         axios.get(apiUrl).then(displayTemperature);
       }
 
@@ -175,9 +196,33 @@
         let cityInputElement = document.querySelector("#city-input");
         search(cityInputElement.value);
       }
-      search("Makaha");
+      function displayFahrenheitTemperature(event) {
+        event.preventDefault();
+        let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
+        let temperatureElement = document.querySelector("#temperature");
+        celciusLink.classList.remove("active");
+        fahrenheitLink.classList.add("active");
+        temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+      }
+      function displayCelciusTemperature(event) {
+        event.preventDefault();
+        celciusLink.classList.add("active");
+        fahrenheitLink.classList.remove("active");
+        let temperatureElement = document.querySelector("#temperature");
+        temperatureElement.innerHTML = Math.round(celciusTemperature);
+      }
+
+      let celciusTemperature = null;
+
       let form = document.querySelector("#search-form");
       form.addEventListener("submit", handleSubmit);
+
+      let fahrenheitLink = document.querySelector("#fahrenheit-link");
+      fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+      let celciusLink = document.querySelector("#celcius-link");
+      celciusLink.addEventListener("click", displayCelciusTemperature);
+      search("Makaha");
     </script>
   </body>
 </html>
