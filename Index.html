@@ -159,7 +159,7 @@
               <div class="weather-forecast-date">
                 Thu
                 <img
-                  src="http://openweathermap.org/img/wn/04d@2x.png"
+                  src="https://openweathermap.org/img/wn/04d@2x.png"
                   alt=""
                   width="45"
                 />
@@ -208,11 +208,12 @@
         return `${day} ${hours}:${minutes}`;
       }
 
-      function displayForecast() {
+      function displayForecast(response) {
+        console.log(response.data.daily);
         let forecastElement = document.querySelector("#forecast");
 
         let forecastHTML = `<div class="row">`;
-        let days = ["Wed", "Thu", "Fri", "Sat"];
+        let days = ["Wed", "Thu", "Friday", "Sat", "Sun", "Mon"];
         days.forEach(function (day) {
           forecastHTML =
             forecastHTML +
@@ -221,7 +222,7 @@
               <div class="weather-forecast-date">
                 ${day}
                 <img
-                  src="http://openweathermap.org/img/wn/04d@2x.png"
+                  src="https://openweathermap.org/img/wn/04d@2x.png"
                   alt=""
                   width="45"
                 />
@@ -236,7 +237,13 @@
         forcastHTML = `</div>`;
         forecastElement.innerHTML = forecastHTML;
       }
-
+      function getForecast(coordinates) {
+        console.log(coordinates);
+        let apiKey = "2f31d99583cac678f183e0eca629c6e7";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+        console.log(apiUrl);
+        axios.get(apiUrl).then(displayForecast);
+      }
       function displayTemperature(response) {
         console.log(response.data);
         let temperatureElement = document.querySelector("#temperature");
@@ -261,6 +268,8 @@
           `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
         );
         iconElement.setAttribute("alt", response.data.weather[0].description);
+
+        getForecast(response.data.coord);
       }
       function search(city) {
         let apiKey = "2f31d99583cac678f183e0eca629c6e7";
@@ -300,7 +309,6 @@
       let celciusLink = document.querySelector("#celcius-link");
       celciusLink.addEventListener("click", displayCelciusTemperature);
       search("Makaha");
-      displayForecast();
     </script>
   </body>
 </html>
