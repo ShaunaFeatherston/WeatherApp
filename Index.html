@@ -13,6 +13,12 @@
     />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Dawning+of+a+New+Day&family=Major+Mono+Display&family=Vast+Shadow&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       .container {
@@ -20,15 +26,15 @@
         padding: 20px;
       }
       .weatherApp {
-        max-width: 650px;
-        margin: 10px auto;
+        max-width: 700px;
+        margin: 0 auto;
         padding: 20px;
         border: 10px;
         border-color: white;
         border-radius: 40px 40px 40px 40px;
         text-align: left;
-        box-shadow: 5px 5px 30px lightseagreen;
-        opacity: 65%;
+        box-shadow: 1px 5px 30px lightseagreen;
+        opacity: 80%;
       }
 
       h1 {
@@ -37,6 +43,7 @@
         line-height: 28px;
         margin-bottom: 10px;
         padding: 10px;
+        font-family: "Major Mono Display", monospace;
       }
       .extra {
         text-align: right;
@@ -45,12 +52,12 @@
         font-size: 25px;
       }
       #date {
-        font-size: 15px;
-        font-weight: bold;
+        font-size: 16px;
+        font-weight: 100;
       }
       #description {
-        padding: 0px;
-        font-size: 15px;
+        padding: 10px;
+        font-size: 18px;
         opacity: 100%;
       }
       ul {
@@ -70,31 +77,35 @@
         text-align: center;
       }
       #temperature {
-        font-size: 40px;
+        font-size: 35px;
         padding: 10px 0px;
         margin: 0 auto;
+        font-family: "Major Mono Display", monospace;
       }
 
       .weather-forecast {
-        margin-top: 40px;
+        margin-top: 20px;
         text-align: center;
         padding: 10px;
+        font-weight: 100;
       }
 
       .weather-forecast-date {
-        font-size: 15px;
+        font-size: 20px;
         text-align: center;
       }
 
       .weather-forecast-max {
-        font-size: 18px;
-
+        font-size: 13px;
         font-weight: bold;
         opacity: 70%;
+        font-family: "Major Mono Display", monospace;
       }
       .weather-forecast-min {
-        font-size: 16px;
-        opacity: 0.5;
+        font-size: 11px;
+        opacity: 100%;
+
+        font-family: "Major Mono Display", monospace;
       }
       .github {
         color: lightseagreen;
@@ -112,26 +123,24 @@
         font-family: "Courier New", Courier, monospace;
       }
       #button {
-        color: lightseagreen;
+        color: black;
         background-color: white;
-        border-color: white;
+        border-color: grey;
         border-radius: 15px;
         text-transform: capitalize;
         opacity: 40%;
         margin: 20px 1px;
         padding: 10px;
-        box-shadow: 2px 2px 20px lightseagreen;
+        cursor: pointer;
+        font-style: italic;
       }
-      #button:hover {
-        color: white;
-        background-color: lightseagreen;
-        border-color: lightseagreen;
-        opacity: 60%;
-      }
+
       #city-input {
         padding: 10px;
         margin: 20px 1px;
         border-radius: 15px;
+        color: lightseagreen;
+        font-style: italic;
       }
       .weather-forecast-date {
         color: lightseagreen;
@@ -140,9 +149,10 @@
       .weather-forecast-date:hover {
         box-shadow: 5px 5px 30px lightseagreen;
         border-radius: 15px;
-        font-weight: bold;
-        opacity: 60%;
+
+        opacity: 80%;
       }
+      
     </style>
   </head>
   <body>
@@ -157,6 +167,7 @@
                 class="form-control"
                 id="city-input"
                 autocomplete="off"
+                autofill="off"
               />
             </div>
             <div class="col-3">
@@ -222,10 +233,18 @@
           href="https://github.com/ShaunaFeatherston/WeatherApp"
           target="_blank"
           class="link"
-          >Open source code</a
+          ><div class="shauna">
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/012/419/original/Shauna.png?1625540313"
+          width="160px"
+          height="50px"
+          ;
+        /></a
         >
-        by Shauna Featherston
+        
       </small>
+      
+      </div>
     </div>
 
     <script>
@@ -344,7 +363,7 @@
       let form = document.querySelector("#search-form");
       form.addEventListener("submit", handleSubmit);
 
-      search("Makaha");
+      search("Hawaii");
     </script>
   </body>
 </html>
